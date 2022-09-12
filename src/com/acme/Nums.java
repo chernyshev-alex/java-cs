@@ -4,6 +4,7 @@ import com.sun.tools.javac.util.ArrayUtils;
 
 import java.math.BigInteger;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -89,13 +90,6 @@ public  class Nums {
 
     }
 
-    public int numDupDigitsAtMostN(int n)  {
-       // A = 1, 2 .. 10, 11, 12 .. 22 .. 33
-        //  2 XOR 2 = 01 XOR 01 = 0
-        //            0A, 0B, 0C 0D 0E 0F
-        return 0;
-    }
-
     public int countSetBits(int n) {
         int count = 0;
         while (n > 0) {
@@ -103,5 +97,25 @@ public  class Nums {
             n >>= 1;
         }
         return  count;
+    }
+
+    public int numDupDigitsAtMostN(int n)  {
+        Function<char[], Integer> dups = (chars) -> {
+            final byte[] map_counts = new byte[255];
+            for (char c: chars) {
+                map_counts[(char)c]++;
+                if (map_counts[(char)c] == 2) {
+                    return 1;
+                }
+            }
+            return  0;
+        };
+
+        int result = 0;
+        for (int i =0; i <= n; i++ ) {
+            String s = String.valueOf(i);
+            result += dups.apply(s.toCharArray());
+        }
+        return result;
     }
 }

@@ -1,8 +1,5 @@
 package com.acme;
 
-import com.sun.org.apache.xpath.internal.functions.Function2Args;
-
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
 

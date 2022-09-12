@@ -1,9 +1,5 @@
 package com.acme;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.function.BiFunction;
-
 public class SearchSort {
 
     void swap(int[] ar, int l, int r) {
@@ -34,9 +30,6 @@ public class SearchSort {
     }
 
     public int findKthLargest(int[] nums, int k) {
-        new PriorityQueue<>();
-
-
         qsort(nums, 0, nums.length -1);
         return nums[nums.length-k];
     }

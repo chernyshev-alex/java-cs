@@ -97,4 +97,5 @@ class NumsTest {
         assertEquals(2, g.countSetBits(6));
         assertEquals(3, g.countSetBits(13));
     }
+
 }
