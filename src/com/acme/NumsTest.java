@@ -55,6 +55,9 @@ class NumsTest {
     void testNumDupDigitsAtMostN() {
         assertEquals(g.numDupDigitsAtMostN(20), 1);
         assertEquals(g.numDupDigitsAtMostN(100), 10);
+        assertEquals(g.numDupDigitsAtMostN(200), 38);
+        assertEquals(g.numDupDigitsAtMostN(500), 122);
+        assertEquals(g.numDupDigitsAtMostN(900), 234);
         assertEquals(g.numDupDigitsAtMostN(1000), 262);
     }
 
