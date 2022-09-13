@@ -21,6 +21,12 @@ class SearchSortTest {
     }
 
     @Test
+    void testFindKthSmallestQSort() {
+        int res = new SearchSort().findKthSmallestQSort(new int[]{3, 6, 1, 5, 2, 4}, 2);
+        assertEquals(2, res);
+    }
+
+    @Test
     void testFindKthSmallestWithStream() {
         int res = new SearchSort().findKthSmallestWithStream(new int[]{3, 6, 1, 5, 2, 4}, 2);
         assertEquals(2, res);

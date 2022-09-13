@@ -40,11 +40,11 @@ public class SearchSort {
     }
 
     public int findKthSmallest(int[] nums, int k) {
-        for (int pass = 0; pass < k; pass++) {
-            for (int i = pass; i < nums.length; i++) {
-                if (nums[pass] > nums[i]) {
-                    int t = nums[pass];
-                    nums[pass] = nums[i];
+        for (int _k = 0; _k < k; _k++) {
+            for (int i = _k; i < nums.length; i++) {
+                if (nums[_k] > nums[i]) {
+                    int t = nums[_k];
+                    nums[_k] = nums[i];
                     nums[i] = t;
                 }
             }
@@ -52,7 +52,21 @@ public class SearchSort {
         return  nums[k-1];
     }
 
+    void __findKthSmallestQSort(int[] ints, int l, int r) {
+        if (l < r) {
+            int p = partition(ints, l, r);
+            __findKthSmallestQSort(ints, l, p-1);
+            __findKthSmallestQSort(ints, p+1, r);
+        }
+    }
+
+    public int findKthSmallestQSort(int[] ints, int k) {
+        __findKthSmallestQSort(ints, 0, ints.length-1);
+        return ints[k-1];
+    }
+
     public int findKthSmallestWithStream(int[] nums, int k) {
         return Arrays.stream(nums).sorted().toArray()[k-1];
     }
+
 }
