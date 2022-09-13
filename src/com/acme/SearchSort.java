@@ -1,5 +1,10 @@
 package com.acme;
 
+import sun.misc.InnocuousThread;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class SearchSort {
 
     void swap(int[] ar, int l, int r) {
@@ -32,5 +37,22 @@ public class SearchSort {
     public int findKthLargest(int[] nums, int k) {
         qsort(nums, 0, nums.length -1);
         return nums[nums.length-k];
+    }
+
+    public int findKthSmallest(int[] nums, int k) {
+        for (int pass = 0; pass < k; pass++) {
+            for (int i = pass; i < nums.length; i++) {
+                if (nums[pass] > nums[i]) {
+                    int t = nums[pass];
+                    nums[pass] = nums[i];
+                    nums[i] = t;
+                }
+            }
+        }
+        return  nums[k-1];
+    }
+
+    public int findKthSmallestWithStream(int[] nums, int k) {
+        return Arrays.stream(nums).sorted().toArray()[k-1];
     }
 }
