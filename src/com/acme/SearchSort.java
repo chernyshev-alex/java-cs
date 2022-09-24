@@ -16,7 +16,7 @@ public class SearchSort {
     int partition(int[] ar, int l, int r) {
         int pivot = ar[r];
         int pidx = l;
-        for (int i = l; i <  r; i++) {
+        for (int i = l; i < r; i++) {
             if (ar[i] <= pivot) {
                 swap(ar, i, pidx);
                 pidx++;

@@ -38,7 +38,7 @@ public class StrsTest {
         }};
         Strs strs = new Strs();
         for (Map.Entry<String, Integer> e : tests.entrySet()) {
-            assertEquals(e.getValue(), strs.lenLongestSubstringNoRepeatedChars(e.getKey()), e.getValue());
+            assertEquals(e.getValue(), strs.lenLongestSubstringNoRepeatedChars(e.getKey()));
         }
     }
 

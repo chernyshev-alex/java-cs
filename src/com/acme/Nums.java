@@ -24,6 +24,7 @@ public  class Nums {
     }
 
     public char firstNonRepeatedCharacter(String s) {
+        // not first but any
         int[] cnt = new int[256];
         for (char c : s.toCharArray()) {
             cnt[c] += 1;

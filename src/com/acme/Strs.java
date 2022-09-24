@@ -21,17 +21,16 @@ public class Strs {
 
     public int lenLongestSubstringNoRepeatedChars(String s) {
         // sliding window
-        if (s.length() ==0 )
-            return 0;
-        if (s.length() ==1)
-            return 1;
+        if (s.length() <= 1)
+            return s.length();
 
         int[] seen = new int[255];
+        Arrays.fill(seen, Integer.MAX_VALUE);
         char[] chars = s.toCharArray();
         int maxLen = 0;
         for (int r = 0, l = 0; r < chars.length; r++) {
             int pos = seen[chars[r]];
-            if (pos >= l && pos != 0) {
+            if (pos >= l && pos != Integer.MAX_VALUE) {
                 l = pos +1;
             }
             seen[chars[r]] = r;
