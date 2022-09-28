@@ -1,7 +1,8 @@
 package com.acme;
 
-import java.util.List;
-import java.util.Stack;
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
+
+import java.util.*;
 
 class ListNode {
      int val;
@@ -30,6 +31,7 @@ public class Lists {
         return stack.isEmpty();
     }
 
+     // ---
     ListNode detectCycle(ListNode head) {
         ListNode hare = head;
         ListNode tort = head;
@@ -64,4 +66,5 @@ public class Lists {
         node.next = null;
         return l;
     }
+
 }

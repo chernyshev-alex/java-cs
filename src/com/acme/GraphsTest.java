@@ -57,4 +57,29 @@ class GraphsTest {
                 new int[][]{{1, 4, 2}, {1, 2, 9}, {4, 2, -4}, {2, 5, -3}, {4, 5, 6}, {3, 2, 3}, {5, 3, 7}, {3, 1, 5}},
                 5,1 ));
     }
+
+    // Detect Cycle
+
+    //Example test:   ([1, 2, 3, 4], [2, 1, 4, 4])
+    //WRONG ANSWER (got True expected False)
+    //
+    //Example test:   ([1, 2, 3, 4], [2, 1, 4, 3])
+    //WRONG ANSWER (got True expected False)
+    //
+    //Example test:   ([1, 2, 2, 3, 3], [2, 3, 3, 4, 5])
+    //OK
+    //
+    //  2->3->1->4-|
+    //  ^__________|
+    // int[] A = new int[] {1,3,2,4 };
+    // int[] B = new int[] {4,1,3,2};
+    @Test
+    void  testDetectCycle() {
+//        int[] A = new int[] {1, 2, 3, 4 };
+//        int[] B = new int[] {2, 1, 4, 4};  // false
+        //  2->3->1->4-*
+        //  ^__________|
+        assertEquals(true, new Graphs().detectCycle(new int[] {1,3,2,4}, new int[] {4,1,3,2}));
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.acme;
 
+import com.sun.tools.javac.util.ArrayUtils;
 import javafx.util.Pair;
 import sun.rmi.server.InactiveGroupException;
 
@@ -124,4 +125,93 @@ public class Graphs {
         }
         return max_element.getAsInt();
     }
+
+    // Detect Cycle on graph. Graph can be disjointed !
+    //
+    // int[] A = new int[] {1,3,2,4 };
+    // int[] B = new int[] {4,1,3,2};
+    // 1 -> 4
+
+    class G {
+        int v;
+        List<List<Integer>> ls;
+
+        public G(int v) {
+            this.v = v;
+            ls = new ArrayList<>(v);
+            for (int i = 0; i < v; i++) {
+                ls.add(new LinkedList<>());
+            }
+        }
+        void addEdge(int from, int to) {
+            ls.get(from).add(to);
+        }
+    }
+
+    boolean checkCycleDfs(G g, int i, boolean[] visited,  boolean[] memo) {
+        if (memo[i])
+            return true;
+        if (visited[i])
+            return false;
+
+        visited[i] = true;
+        memo[i] = true;
+
+        List<Integer> children = g.ls.get(i);
+        if (children.size() <=1) return false;
+        for (Integer c: children)
+            if (checkCycleDfs(g, c, visited, memo))
+                return true;
+        memo[i] = false;
+        return false;
+    }
+
+    boolean checkCycle(G g) {
+        boolean[] visited = new boolean[g.v];
+        boolean[] recStack = new boolean[g.v];
+        for (int i = 0; i < g.v; i++) {
+            if (checkCycleDfs(g, i, visited, recStack))
+                return true;
+        }
+        return false;
+    }
+
+    boolean hasCycle(ArrayList<Integer>[] g, Integer v, boolean[] visited, boolean[] isVisiting) {
+        isVisiting[v] = true;
+        for (Integer adj_v : g[v]) {
+            if (isVisiting[adj_v]) {
+                // backward edge exists
+                return true;
+            } else if (!visited[adj_v] && hasCycle(g, adj_v, visited, isVisiting)) {
+                return true;
+            }
+        }
+        isVisiting[v] = false;
+        visited[v] = true;
+        return false;
+    }
+
+    // https://www.baeldung.com/java-graph-has-a-cycle
+    // + disjointed
+    public boolean detectCycle(int[] A, int[] B) {
+        // make adj list
+        int sz = A.length +1;
+        ArrayList[] g = new ArrayList[sz];
+        for (int i = 0; i < A.length; i++) {
+            if (g[A[i]] == null) {
+                g[A[i]] = new ArrayList<Integer>();
+            }
+            g[A[i]].add(B[i]);
+        }
+        // find cycle
+        boolean[] visited = new boolean[sz];
+        boolean[] isVisiting = new boolean[sz];
+        for (int i = 0; i < A.length; i++) {
+            if (! visited[A[i]] && hasCycle(g, A[i], visited, isVisiting)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
